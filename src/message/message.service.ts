@@ -47,7 +47,7 @@ export class MessageService {
 
     async findById(params:messageDto){
         try{
-            const messages=await this.messageModel.findOne({messageId:params.messageId})
+            const messages=await this.messageModel.findOne({userId:params.userId})
             if(messages){
                 return {
                     statusCode:HttpStatus.OK,

@@ -33,7 +33,7 @@ export class MessageController {
   }
 
 
-  @Post('/getMessageId')
+  @Post('/getMessageUserById')
   async getMesage(@Body() body:messageDto){
     try{
       const response=await this.messageService.findById(body)

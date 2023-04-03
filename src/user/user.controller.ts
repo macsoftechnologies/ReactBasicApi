@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post } from '@nestjs/common';
 import { userDto } from './dto/user.dto';
 import { UserService } from './user.service';
 
@@ -40,4 +40,55 @@ export class UserController {
     }
   }
 
+
+
+  @Get('/getUsers')
+  async userget(@Body() body:userDto){
+    const result=await this.userService.get()
+    return result
+  }catch(error){
+    return {
+      statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+      message:error
+    }
+  }
+
+  @Post('/getuserByid')
+  async getuser(@Body() body:userDto){
+    try{
+      const result=await this.userService.getById(body)
+      return result
+    }catch(error){
+      return {
+        statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+        message:error 
+      }
+    }
+  }
+
+  @Post('/deleteUser')
+  async removeUser(@Body() body:userDto){
+    try{
+      const result=await this.userService.deleteUser(body)
+      return result
+    }catch(error){
+      return {
+        statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+        message:error 
+      }
+    }
+  }
+
+  @Post('/updateUser')
+  async updateUser(@Body() body:userDto){
+    try{
+      const result=await this.userService.editUser(body)
+      return result
+    }catch(error){
+      return {
+        statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+        message:error 
+      }
+    }
+  }
 }

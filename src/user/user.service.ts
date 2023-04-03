@@ -62,4 +62,80 @@ export class UserService {
         }
       }
     
+
+      async get(){
+        try{
+          const getRes=await this.userModel.find()
+          if(getRes){
+          return{
+            statusCode:HttpStatus.OK,
+            data:getRes
+          }
+        }
+        }catch(error){
+          return{
+         statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+         message:error 
+            
+          }
+        }
+        }
+
+        
+        async getById(params:userDto){
+          try{
+            const getBy=await this.userModel.findOne({userId:params.userId})
+            if(getBy){
+              return {
+                statusCode:HttpStatus.OK,
+                data:getBy
+              }
+            }
+          }catch(error){
+            return {
+              statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+              message:error 
+            }
+          }
+        }
+
+      
+        async deleteUser(params:userDto){
+          try{
+            const delUser=await this.userModel.deleteOne({userId:params.userId})
+            if(delUser){
+              return {
+                statusCode:HttpStatus.OK,
+                message:'deleted Sucessfully',
+                del:delUser
+              }
+            }
+          }catch(error){
+            return {
+              statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+              message:error 
+            }
+          }
+        }
+
+        async editUser(params:userDto){
+          try{
+            const editUser=await this.userModel.updateOne({userId:params.userId},{$set:{name:params.name,email:params.email,password:params.password}})
+            if(editUser){
+              return {
+                statusCode:HttpStatus.OK,
+                message:'updated Sucessfully',
+                editRes:editUser
+              }
+            }
+          }catch(error){
+            return {
+              statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+              message:error 
+            }
+          }
+        }
+
+
+       
 }
