@@ -51,7 +51,6 @@ export class MessageService {
             if(messages){
                 return {
                     statusCode:HttpStatus.OK,
-                    message:'list of service',
                     data:messages
                 }
             }

@@ -14,6 +14,8 @@ export class message extends Document{
     from:string
     @Prop()
     to:string
+    @Prop({type: Date,default:Date.now})
+    date:Date
 }
 
 export const messageSchema=SchemaFactory.createForClass(message)

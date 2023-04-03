@@ -11,5 +11,7 @@ export class messageDto{
     from:string
     @ApiProperty()
     to:string
+    @ApiProperty()
+    date:Date
     
 }
