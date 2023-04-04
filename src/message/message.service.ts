@@ -62,6 +62,41 @@ export class MessageService {
         }
     }
 
+async findmessageTo(params:messageDto){
+    try{
+        const getto=await this.messageModel.findOne({to:params.to})
+        if(getto){
+            return {
+                statusCode:HttpStatus.OK,
+                toReq:getto
+            }
+        }
+    }catch(error){
+        return {
+            statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+            message:error 
+        }
+    }
+}
+   
+    async findmessageFrom(params:messageDto){
+        try{
+            const getfrom=await this.messageModel.findOne({from:params.from})
+            if(getfrom){
+                return {
+                    statusCode:HttpStatus.OK,
+                    fromreq:getfrom
+                }
+            }
+        }catch(error){
+            return {
+                statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+                message:error 
+            }
+        }
+    }
+
+
     async delteMess(params:messageDto){
         try{
             const del=await this.messageModel.deleteOne({messageId:params.messageId})

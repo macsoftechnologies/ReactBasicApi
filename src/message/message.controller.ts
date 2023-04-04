@@ -46,6 +46,31 @@ export class MessageController {
     }
   }
 
+@Post('/getmessageTo')
+async getTomessage(@Body() body:messageDto){
+  try{
+    const response=await this.messageService.findmessageTo(body)
+    return response
+  }catch(error){
+    return {
+      statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+      message:error 
+    }
+  }
+}
+
+@Post('/getmeessgefrom')
+async getfromessage(@Body() body:messageDto){
+  try{
+    const response=await this.messageService.findmessageFrom(body)
+    return response
+  }catch(error){
+    return {
+      statusCode:HttpStatus.INTERNAL_SERVER_ERROR,
+      message:error 
+    }
+  }
+}
   @Post('/delmessage')
   async removemes(@Body() body:messageDto){
     try{
